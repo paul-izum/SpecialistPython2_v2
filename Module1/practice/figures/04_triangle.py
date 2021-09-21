@@ -4,28 +4,31 @@ class Point:
         self.y = y
 
     def dist_to(self, other_point):
-        ...
+        return ((self.x - other_point.x) ** 2 + (self.y - other_point.y) ** 2) ** 0.5
 
 
-class Triangle:
-    def __init__(self, p1, p2, p3):
-        self.point1 = p1
-        self.point2 = p2
-        self.point3 = p3
+class Circle:
+    def __init__(self, center_coords, radius):
+        self.center_coords = Point(*center_coords) 
+        self.radius = radius
 
-    def perimeter(self):
-        ...
+    def intersect(self, other_circle):
+        """
+        Проверяет пересекается ли текущая окружность с other_circle
+        :return: True/False
+        """
+        dist = self.center_coords.dist_to(other_circle.center_coords)
+        return self.radius + other_circle.radius <= dist
 
-    def area(self):
-        # Для нахождения площади, используйте формулу Герона
-        ...
 
 
-# Треугольник задан координатами трех точек
-triangle1 = Triangle(Point(2, 4), Point(12, 8), Point(-2, 0))
-# Задание: найдите площадь и пеиметр треугольника, реализовав методы
 
-# TODO: your core here...
+# Окружности заданы координатами центров и радиусами
+circle1 = Circle((6, -8), 5)
+circle2 = Circle((2, 4), 4)
+# Задание: проверьте пересекаются ли данные окружности
 
-print("Периметр треугольника = ", ...)
-print("Площадь треугольника = ", ...)
+if circle1.intersect(circle2):
+    print("Окружности пересекаются")
+else:
+    print("Окружности НЕ пересекаются")
